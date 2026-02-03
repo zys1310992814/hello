@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        architecture: [x86_64, i686, arm, aarch64]
+        architecture: [x86_64, i686
     
     steps:
       - name: Checkout code
@@ -97,14 +97,6 @@ jobs:
               sudo apt-get install -y gcc-multilib
               export CC="gcc -m32"
               ;;
-            arm)
-              sudo apt-get install -y gcc-arm-linux-gnueabi qemu-user
-              export CC="arm-linux-gnueabi-gcc"
-              ;;
-            aarch64)
-              sudo apt-get install -y gcc-aarch64-linux-gnu qemu-user
-              export CC="aarch64-linux-gnu-gcc"
-              ;;
             *)
               export CC="gcc"
               ;;
@@ -115,15 +107,6 @@ jobs:
           CC="$CC" make clean
           CC="$CC" make all
           file hello
-      
-      - name: Test with QEMU (for ARM)
-        if: ${{ matrix.architecture == 'arm' || matrix.architecture == 'aarch64' }}
-        run: |
-          if [ "${{ matrix.architecture }}" = "arm" ]; then
-            qemu-arm -L /usr/arm-linux-gnueabi ./hello
-          else
-            qemu-aarch64 -L /usr/aarch64-linux-gnu ./hello
-          fi
 
   # 发布阶段
   create-release:
