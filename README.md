@@ -1,2 +1,2 @@
 # hello
-使用github actions
+使用github actions测试
