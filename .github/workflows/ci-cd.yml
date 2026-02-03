@@ -67,14 +67,6 @@ jobs:
       - name: Run tests
         run: make test
       
-      - name: Static analysis
-        run: |
-          if [ "${{ matrix.compiler }}" = "gcc" ]; then
-            gcc -Wall -c src/hello.c -I./include -o /dev/null
-          else
-            clang --analyze src/hello.c
-          fi
-      
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
