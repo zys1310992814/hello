@@ -83,7 +83,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        architecture: [x86_64, i686
+        architecture: [x86_64, i686]
     
     steps:
       - name: Checkout code
