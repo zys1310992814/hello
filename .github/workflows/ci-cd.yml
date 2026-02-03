@@ -70,7 +70,7 @@ jobs:
       - name: Static analysis
         run: |
           if [ "${{ matrix.compiler }}" = "gcc" ]; then
-            gcc -Wall -Wextra -pedantic -c src/hello.c -o /dev/null
+            gcc -Wall -Wextra -pedantic -c src/hello.c -I./include -o /dev/null
           else
             clang --analyze src/hello.c
           fi
